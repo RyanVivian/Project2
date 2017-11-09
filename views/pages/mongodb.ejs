@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<div class="container">
+    <h2>Database Results getting Orders</h2>
+    <ul>
+        <% results.forEach(function(o) { %>
+        <li>_ID: <%= o._ID %>< /br>
+            CUSTOMER_ID: <%= o.CUSTOMER_ID %>< /br>
+            BILLING_ID: <%= o.BILLING_ID %>< /br>
+            SHIPPING_ID: <%= o.SHIPPING_ID %>< /br>
+            DATE: <%= o.DATE %>< /br>
+            ORDER_TOTAL: <%= o.ORDER_TOTAL %>< /br>
+        </li>
+        <% }); %>
+    </ul>
+</div>
+</body>
+</html>
