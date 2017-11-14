@@ -12,6 +12,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/mongodb', controllerDBOrders.getAllOrders());
+router.get('/mongodb', controllerDBOrders.getAllOrders);
 
 module.exports = router;
