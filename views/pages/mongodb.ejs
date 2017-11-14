@@ -13,6 +13,14 @@
             BILLING_ID: <%= o.BILLING_ID %><br>
             SHIPPING_ID: <%= o.SHIPPING_ID %><br>
             DATE: <%= o.DATE %><br>
+            PRODUCT_VECTOR:<br>
+            <ul>
+            <% o.PRODUCT_VECTOR.forEach(function(el) { %>
+                <li>PRODUCT_ID: <%= el.PRODUCT_ID %></li>
+                <li>QUANTITY: <%= el.QUANTITY %></li>
+                <li>PRICE: <%= el.PRICE %></li>
+            <% }); %>
+            </ul>
             ORDER_TOTAL: <%= o.ORDER_TOTAL %><br>
         </li>
         <% }); %>
