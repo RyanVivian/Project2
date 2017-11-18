@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/mongodb', controllerDBOrders.getAllOrders);
-router.post('/testData', controllerDBOrders.testPhp);
+router.get('/testData', controllerDBOrders.testPhp);
 
 
 module.exports = router;
