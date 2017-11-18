@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
-// var mongodb = require('mongodb');
-// var uri = 'mongodb://ryanvivi:nem4eva@ds251845.mlab.com:51845/heroku_qd42qk6m';
+//to process data sent in on request need body-parser module
+var bodyParser = require('body-parser');
+
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
 
 // Get controller code.
 var controllerDBOrders = require('../controllers/database');
@@ -13,5 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/mongodb', controllerDBOrders.getAllOrders);
+router.post('/testData', controllerDBOrders.testPhp);
+
 
 module.exports = router;

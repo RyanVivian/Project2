@@ -1,5 +1,11 @@
 var mongodb = require('mongodb');
 var uri = 'mongodb://ryanvivi:nem4eva@ds251845.mlab.com:51845/heroku_qd42qk6m';
+var express = require('express');
+var router = express.Router();
+var bodyParser = require('body-parser'); //to process data sent in on request need body-parser module
+
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
 
 module.exports.getAllOrders = function (req, res) {
     mongodb.MongoClient.connect(uri, function(err, db) {
@@ -19,4 +25,14 @@ module.exports.getAllOrders = function (req, res) {
 
         });
     });
+};
+
+module.exports.testPhp = function (req, res) {
+
+    //now processing post
+    //expecting data variable called name --retrieve value using body-parser
+    var body = JSON.stringify(req.body);  //if wanted entire body as JSON
+    var params = JSON.stringify(req.params);//if wanted parameters
+    var first = req.body.first;  //retrieve the data associated with name
+    res.render('pages/testDisplay', {first: first});
 };
