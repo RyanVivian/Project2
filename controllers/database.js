@@ -33,6 +33,9 @@ module.exports.testPhp = function (req, res) {
     //expecting data variable called name --retrieve value using body-parser
     var body = JSON.stringify(req.body);  //if wanted entire body as JSON
     var params = JSON.stringify(req.params);//if wanted parameters
+    data['first'] = 'first';
+    data['last'] = 'last';
+
     var first = 'first';  //retrieve the data associated with order data
     var last = 'last';
     var address = req.body.address;
@@ -42,5 +45,5 @@ module.exports.testPhp = function (req, res) {
     var card = req.body.card;
     var card_num = req.body.card_num;
     var exp_date = req.body.exp_date;
-    res.render('pages/testDisplay', {first : first, last : last});
+    res.render('pages/testDisplay', {data : data});
 };
