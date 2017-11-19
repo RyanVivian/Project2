@@ -33,6 +33,7 @@ module.exports.testPhp = function (req, res) {
     //expecting data variable called name --retrieve value using body-parser
     var body = JSON.stringify(req.body);  //if wanted entire body as JSON
     var params = JSON.stringify(req.params);//if wanted parameters
+    var data;
     data['first'] = 'first';
     data['last'] = 'last';
 
