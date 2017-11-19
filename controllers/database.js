@@ -46,5 +46,5 @@ module.exports.testPhp = function (req, res) {
     var card = req.body.card;
     var card_num = req.body.card_num;
     var exp_date = req.body.exp_date;
-    res.render('pages/testDisplay', {data : data});
+    res.render('pages/testDisplay', {results: data});
 };
