@@ -36,7 +36,7 @@ module.exports.testPhp = function (req, res) {
 
     var first = 'first';  //retrieve the data associated with order data
     var last = 'last';
-    var address = req.body.address;
+    var address = 'address';
     var city = req.body.city;
     var state = req.body.state;
     var zip = req.body.zip;
