@@ -35,6 +35,12 @@ module.exports.testPhp = function (req, res) {
     var params = JSON.stringify(req.params);//if wanted parameters
     var first = req.body.first;  //retrieve the data associated with order data
     var last = req.body.last;
-    var
-    res.render('pages/testDisplay', {first : first});
+    var address = req.body.address;
+    var city = req.body.city;
+    var state = req.body.state;
+    var zip = req.body.zip;
+    var card = req.body.card;
+    var card_num = req.body.card_num;
+    var exp_date = req.body.exp_date;
+    res.render('pages/testDisplay', {first : first, last : last});
 };
