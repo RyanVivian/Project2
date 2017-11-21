@@ -8,6 +8,9 @@ var querystring = require('querystring'); //for use in GET Query string of form 
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
 
+var mongodb = require('mongodb');
+var uri = 'mongodb://ryanvivi:nem4eva@ds251845.mlab.com:51845/heroku_qd42qk6m';
+
 // Get controller code.
 var controllerDBOrders = require('../controllers/database.js');
 
@@ -19,5 +22,17 @@ router.get('/', function(req, res, next) {
 
 router.get('/getAllOrders', controllerDBOrders.getAllOrders);
 router.post('/storeData', controllerDBOrders.storeData);
+router.post('/testData', function (req, res) {
+    mongodb.MongoClient.connect(uri, function(err, db) {
+        if(err) throw err;
+
+        // Get collection of customers, billing, shipping, orders.
+        var customers = db.collection('CUSTOMERS');
+
+        customers.insertOne( {item: "card"}, function (err, result) {
+            if (err) throw err;
+        });
+    });
+});
 
 module.exports = router;
