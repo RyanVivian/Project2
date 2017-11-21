@@ -62,7 +62,7 @@ module.exports.storeData = function (req, res) {
         var customerData = {_id : customerID, FIRSTNAME : first, LASTNAME : last,
             STREET : address, CITY : city, STATE : state, ZIP : zip};
 
-        customers.insertOne(customerData, function (err, result) {
+        customers.insert(customerData, function (err, result) {
             if (err) throw err;
         });
 
