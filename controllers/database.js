@@ -27,7 +27,7 @@ module.exports.getAllOrders = function (req, res) {
     });
 };
 
-module.exports.testPhp = function (req, res) {
+module.exports.storeData = function (req, res) {
 
     //now processing post
     //expecting data variable called name --retrieve value using body-parser
@@ -35,13 +35,43 @@ module.exports.testPhp = function (req, res) {
     var params = JSON.stringify(req.params);//if wanted parameters
 
     var first = req.body.first;  //retrieve the data associated with order data
-    var last = 'last';
-    var address = 'address';
+    var last = req.body.last;
+    var address = req.body.address;
     var city = req.body.city;
     var state = req.body.state;
     var zip = req.body.zip;
     var card = req.body.card;
     var card_num = req.body.card_num;
     var exp_date = req.body.exp_date;
-    res.render('pages/testDisplay', {"first": first, "last": last, "address": address});
+
+    mongodb.MongoClient.connect(uri, function(err, db) {
+        if(err) throw err;
+
+        // Create IDs for all the collections.
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+
+        // Get collection of customers, billing, shipping, orders.
+        var customers = db.collection('CUSTOMERS');
+        var billing = db.collection('BILLING');
+        var shipping = db.collection('SHIPPING');
+        var orders = db.collection('ORDERS');
+
+        // Insert data into CUSTOMERS.
+        var customerData = {_id : customerID, FIRSTNAME : first, LASTNAME : last,
+            STREET : address, CITY : city, STATE : state, ZIP : zip};
+
+        customers.insertOne(customerData, function (err, result) {
+            if (err) throw err;
+        });
+
+        // Insert data into BILLING.
+        // var billingData =
+
+        // Close connection.
+        db.close(function  (err) {
+            if(err) throw err;
+        });
+    });
 };
