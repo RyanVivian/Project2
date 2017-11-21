@@ -34,10 +34,10 @@ module.exports.storeData = function (req, res) {
     var body = JSON.stringify(req.body);  //if wanted entire body as JSON
     var params = JSON.stringify(req.params);//if wanted parameters
 
-    var first = req.body.first;  //retrieve the data associated with order data
-    var last = req.body.last;
-    var address = req.body.address;
-    var city = req.body.city;
+    var first = 'first';  //retrieve the data associated with order data
+    var last = 'last';
+    var address = 'address';
+    var city = 'city';
     var state = req.body.state;
     var zip = req.body.zip;
     var card = req.body.card;
