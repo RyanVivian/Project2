@@ -9,7 +9,7 @@ router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
 
 // Get controller code.
-var controllerDBOrders = require('../controllers/database');
+var controllerDBOrders = require('../controllers/database.js');
 
 
 /* GET home page. */
