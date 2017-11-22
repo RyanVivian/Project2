@@ -22,17 +22,5 @@ router.get('/', function(req, res, next) {
 
 router.get('/getAllOrders', controllerDBOrders.getAllOrders);
 router.post('/storeData', controllerDBOrders.storeData);
-router.post('/testData', function (req, res) {
-    mongodb.MongoClient.connect(uri, function(err, db) {
-        if(err) throw err;
-
-        // Get collection of customers, billing, shipping, orders.
-        var customers = db.collection('CUSTOMERS');
-
-        customers.insertOne( {item: "card"}, function (err, result) {
-            if (err) throw err;
-        });
-    });
-});
 
 module.exports = router;

@@ -34,16 +34,24 @@ module.exports.storeData = function (req, res) {
     var body = JSON.stringify(req.body);  //if wanted entire body as JSON
     var params = JSON.stringify(req.params);//if wanted parameters
 
-    var first = req.body.first;  //retrieve the data associated with order data
+    // Retrieve the data associated with customer.
+    var first = req.body.first;
     var last = req.body.last;
-    var address = req.body.address;
-    var city = req.body.city;
-    var state = req.body.state;
-    var zip = req.body.zip;
+    var cust_address = req.body.cust_address;
+    var cust_city = req.body.cust_city;
+    var cust_state = req.body.cust_state;
+    var cust_zip = req.body.cust_zip;
+    // Retrieve the data associated with billing.
     var card = req.body.card;
     var card_num = req.body.card_num;
     var exp_date = req.body.exp_date;
+    // Retrieve the data associated with shipping.
+    var ship_address = req.body.ship_address;
+    var ship_city = req.body.ship_city;
+    var ship_state = req.body.ship_state;
+    var ship_zip = req.body.ship_zip;
 
+    // Connect to the database.
     mongodb.MongoClient.connect(uri, function(err, db) {
         if(err) throw err;
 
@@ -60,14 +68,31 @@ module.exports.storeData = function (req, res) {
 
         // Insert data into CUSTOMERS.
         var customerData = {_id : customerID, FIRSTNAME : first, LASTNAME : last,
-            STREET : address, CITY : city, STATE : state, ZIP : zip};
+            STREET : cust_address, CITY : cust_city, STATE : cust_state, ZIP : cust_zip};
 
         customers.insertOne(customerData, function (err, result) {
             if (err) throw err;
         });
 
         // Insert data into BILLING.
-        // var billingData =
+        var shippingData = {_id : billingID, CUSTOMER_ID : customerID, CREDITCARDTYPE : card,
+            CREDITCARDNUM : card_num, CREDITCARDEXP : exp_date};
+
+        billing.insertOne(billingData, function (err, result) {
+            if (err) throw err;
+        });
+
+        // Insert data into SHIPPING.
+        var shippingData = {_id : billingID, CUSTOMER_ID : customerID, SHIPPING_STREET : ship_address,
+            SHIPPING_CITY : ship_city, SHIPPING_STATE : ship_state, SHIPPING_ZIP : ship_zip};
+
+        shipping.insertOne(shippingData, function (err, result) {
+            if (err) throw err;
+        });
+
+        // Insert data into ORDERS.
+        var orderData = {CUSTOMER_ID : customerID, BILLING_ID : billingID, SHIPPING_ID : shippingID,
+        DATE : new Date().toDateString()};
 
         // Close connection.
         db.close(function  (err) {
