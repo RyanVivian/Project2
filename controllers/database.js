@@ -71,7 +71,7 @@ module.exports.storeData = function (req, res) {
             STREET : cust_address, CITY : cust_city, STATE : cust_state, ZIP : cust_zip};
 
         // Create a document to insert into BILLING.
-        var shippingData = {_id : billingID, CUSTOMER_ID : customerID, CREDITCARDTYPE : card,
+        var billingData = {_id : billingID, CUSTOMER_ID : customerID, CREDITCARDTYPE : card,
             CREDITCARDNUM : card_num, CREDITCARDEXP : exp_date};
 
         // Create a document to insert into SHIPPING.
