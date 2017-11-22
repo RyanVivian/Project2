@@ -70,7 +70,7 @@ module.exports.storeData = function (req, res) {
         var customerData = {_id : customerID, FIRSTNAME : first, LASTNAME : last,
             STREET : cust_address, CITY : cust_city, STATE : cust_state, ZIP : cust_zip};
 
-        customers.insertOne(customerData, function (err, result) {
+        customers.insert(customerData, function (err, result) {
             if (err) throw err;
         });
 
@@ -78,7 +78,7 @@ module.exports.storeData = function (req, res) {
         var shippingData = {_id : billingID, CUSTOMER_ID : customerID, CREDITCARDTYPE : card,
             CREDITCARDNUM : card_num, CREDITCARDEXP : exp_date};
 
-        billing.insertOne(billingData, function (err, result) {
+        billing.insert(billingData, function (err, result) {
             if (err) throw err;
         });
 
@@ -86,13 +86,17 @@ module.exports.storeData = function (req, res) {
         var shippingData = {_id : billingID, CUSTOMER_ID : customerID, SHIPPING_STREET : ship_address,
             SHIPPING_CITY : ship_city, SHIPPING_STATE : ship_state, SHIPPING_ZIP : ship_zip};
 
-        shipping.insertOne(shippingData, function (err, result) {
+        shipping.insert(shippingData, function (err, result) {
             if (err) throw err;
         });
 
         // Insert data into ORDERS.
         var orderData = {CUSTOMER_ID : customerID, BILLING_ID : billingID, SHIPPING_ID : shippingID,
         DATE : new Date().toDateString()};
+
+        orders.insert(orderData, function (err, result) {
+            if (err) throw err;
+        });
 
         // Close connection.
         db.close(function  (err) {
