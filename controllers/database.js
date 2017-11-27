@@ -51,6 +51,9 @@ module.exports.storeData = function (req, res) {
     var ship_city = req.body.ship_city;
     var ship_state = req.body.ship_state;
     var ship_zip = req.body.ship_zip;
+    // Retrieve the data associated with orders.
+    var prod_vect = req.body.prod_vect;
+    var total = req.body.total;
 
     // Connect to the database.
     mongodb.MongoClient.connect(uri, function(err, db) {
@@ -81,7 +84,7 @@ module.exports.storeData = function (req, res) {
 
         // Create a document to insert into ORDERS.
         var orderData = {CUSTOMER_ID : customerID, BILLING_ID : billingID, SHIPPING_ID : shippingID,
-            DATE : new Date().toDateString()};
+            DATE : new Date().toDateString(), PRODUCT_VECTOR : prod_vect, ORDER_TOTAL : total};
 
         // Insert document into CUSTOMERS.
         customers.insertOne(customerData, function (err, result) {
