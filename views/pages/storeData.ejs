@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Order Summary</title>
+
+    <!-- To use newest Bootstrap components -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- CSS stylings -->
+    <style type="text/css">
+        body { background-color: #FFF8DC; }
+        body { background-color: #FFF8DC; }
+        table { border-collapse: collapse; }
+
+        table, th, td { border: 1px solid black; }
+
+        th, td { padding: 10px; text-align: center; }
+        h3 {border-bottom: thin solid #000000; width: 80% }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <h2>Order Summary</h2>
+    <br />
+
+    <h3>Shipping Information</h3>
+    <br />
+
+    <!-- User Information Form -->
+    <form>
+        <div class="form-row">
+            <div class="form-group col-lg-6">
+                <label for="first" class="col-form-label">First Name</label>
+                <input type="text" class="form-control" id="first" name="first" placeholder="Enter first name" value="<%= customer.FIRSTNAME %>" disabled>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="last" class="col-form-label">Last Name</label>
+                <input type="text" class="form-control" id="last" name="last" placeholder="Enter last name" value="<%= customer.LASTNAME %>" disabled>
+            </div>
+        </div>
+        <div class="form-group col-lg-12">
+            <label for="address" class="col-form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" value="<%= shipping.SHIPPING_STREET %>" disabled>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-lg-6">
+                <label for="city" class="col-form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" value="<%= shipping.SHIPPING_CITY %>" disabled>
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="state" class="col-form-label">State</label>
+                <input type="text" class="form-control "id="state" name="state" placeholder="Ex: CA" value="<%= shipping.SHIPPING_STATE %>" disabled>
+            </div>
+            <div class="form-group col-lg-2">
+                <label for="zip" class="col-form-label">Zip Code</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Ex: 94553" value="<%= shipping.SHIPPING_ZIP %>" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-lg-6">
+                <label for="phone" class="col-form-label">Telephone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Ex: (925) 555 - 1234" value="<%= customer.EMAIL %>" disabled>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="email" class="col-form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ex: name123@gmail.com" value="<%= customer.EMAIL %>" disabled>
+            </div>
+        </div>
+    </form>
+
+    <p>&nbsp;</p>
+    <h3>Billing Information</h3>
+    <br />
+
+    <!-- Billing Information Form -->
+    <form>
+        <div class="form-row">
+            <div class="form-group col-lg-6">
+                <label for="first" class="col-form-label">First Name on Credit Card</label>
+                <input type="text" class="form-control" id="first" name="first" placeholder="Enter first name" value="<%= customer.FIRSTNAME %>" disabled>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="last" class="col-form-label">Last Name on Credit Card</label>
+                <input type="text" class="form-control" id="last" name="last" placeholder="Enter last name" value="<%= customer.LASTNAME %>" disabled>
+            </div>
+        </div>
+        <div class="form-group col-lg-12">
+            <label for="address" class="col-form-label">Billing Address</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" value="<%= customer.STREET %>" disabled>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-lg-6">
+                <label for="city" class="col-form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" value="<%= customer.CITY %>" disabled>
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="state" class="col-form-label">State</label>
+                <input type="text" class="form-control "id="state" name="state" placeholder="Ex: CA" value="<%= customer.STATE %>" disabled>
+            </div>
+            <div class="form-group col-lg-2">
+                <label for="zip" class="col-form-label">Zip Code</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Ex: 94553" value="<%= customer.ZIP %>" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-lg-4">
+                <label for="card-radio" class="col-form-label">Choose Credit Card</label>
+                <div class="radio" id="card-radio">
+                    <label class="radio-inline disabled"><input type="radio" name="card" value="Visa" checked="checked">Visa</label>
+                    <label class="radio-inline disabled"><input type="radio" name="card" value="Master Card" >Master Card</label>
+                    <label class="radio-inline disabled"><input type="radio" name="card" value="American Express">American Express</label>
+                </div>
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="card-num" class="col-form-label">Credit Card Number</label>
+                <input type="text" class="form-control "id="card-num" name="card-num" placeholder="Enter card number" value="<%= billing.CREDITCARDNUM %>" disabled>
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="exp-date" class="col-form-label">Experation Date</label>
+                <input type="text" class="form-control" id="exp-date" name="exp-date" placeholder="Ex: 12/20" value="<%= billing.CREDITCARDEXP %>" disabled>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- End of container -->
+</body>
+</html>

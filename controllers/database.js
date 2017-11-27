@@ -41,6 +41,7 @@ module.exports.storeData = function (req, res) {
     var cust_city = req.body.cust_city;
     var cust_state = req.body.cust_state;
     var cust_zip = req.body.cust_zip;
+    var cust_email = req.body.cust_email;
     // Retrieve the data associated with billing.
     var card = req.body.card;
     var card_num = req.body.card_num;
@@ -68,7 +69,7 @@ module.exports.storeData = function (req, res) {
 
         // Create a document to insert into CUSTOMERS.
         var customerData = {_id : customerID, FIRSTNAME : first, LASTNAME : last,
-            STREET : cust_address, CITY : cust_city, STATE : cust_state, ZIP : cust_zip};
+            STREET : cust_address, CITY : cust_city, STATE : cust_state, ZIP : cust_zip, EMAIL: cust_email};
 
         // Create a document to insert into BILLING.
         var billingData = {_id : billingID, CUSTOMER_ID : customerID, CREDITCARDTYPE : card,
@@ -101,6 +102,10 @@ module.exports.storeData = function (req, res) {
         orders.insertOne(orderData, function (err, result) {
             if (err) throw err;
         });
+
+         // Render storeData.ejs with all the transaction data.
+        res.render('pages/storeData', {customer: customerData, order: orderData,
+            billing: billingData, shipping: shippingData });
 
         // Close connection.
         db.close(function  (err) {
